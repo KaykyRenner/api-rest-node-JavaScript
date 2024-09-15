@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "nodemon": "^3.1.4",
+    "yarn": "^1.22.22"
+  },
+  "name": "api-rest-node-javaScript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "kayky",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "start": "node src/server/index.js",
+    "dev": "nodemon src/server/index.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}
