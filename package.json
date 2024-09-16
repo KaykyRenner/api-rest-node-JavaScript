@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "@eslint/js": "^9.10.0",
+    "@types/http-status-codes": "^1.2.0",
     "eslint": "^9.10.0",
     "globals": "^15.9.0",
     "nodemon": "^3.1.4",
@@ -13,10 +14,12 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "node src/server/index.js",
-    "dev": "nodemon src/server/index.js"
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
   },
   "dependencies": {
-    "express": "^4.21.0"
+    "dotenv": "^16.4.5",
+    "express": "^4.21.0",
+    "http-status-codes": "^2.3.0"
   }
 }

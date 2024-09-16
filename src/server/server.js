@@ -1,13 +1,10 @@
 const express = require('express');
 const app = express();
-app.get('/',(req,res)=>{
+const router = require('./routes/index')
+require('dotenv').config()
 
-    return res.send('olá dev');
-});
-
-
-
-
+app.use(express.json())
+app.use(router)
 
 module.exports = app;
 
