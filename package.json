@@ -1,9 +1,12 @@
 {
   "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "eslint": "^9.10.0",
+    "globals": "^15.9.0",
     "nodemon": "^3.1.4",
     "yarn": "^1.22.22"
   },
-  "name": "api-rest-node-javaScript",
+  "name": "API-NODE-JAVASCRIPT",
   "version": "1.0.0",
   "main": "index.js",
   "author": "kayky",
