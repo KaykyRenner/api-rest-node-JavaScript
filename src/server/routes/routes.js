@@ -11,6 +11,6 @@ router.get('/',(req,res)=>{
     
 });
 
-router.post('/cidades',cidadeController.create)
+router.post('/cidadesCreate',cidadeController.validationCreate,cidadeController.create)
 
 module.exports = router

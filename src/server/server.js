@@ -1,3 +1,4 @@
+require('./shared/services/traducoesYup')
 const express = require('express');
 const app = express();
 const router = require('./routes/routes')
