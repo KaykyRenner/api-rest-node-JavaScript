@@ -1,6 +1,6 @@
 const { StatusCodes } = require('http-status-codes')
 const yup = require('yup')
-const {TValidation} = require('../../shared/middlewares/middleware')
+const {TVvalidate} = require('../../shared/middlewares/middleware')
 
 const esquemaValidation = yup.object().shape({
     nomeCidade:yup.string().required().min(3),
@@ -17,5 +17,5 @@ const getSchemas = (req) =>{
     }
 
 }
-const GetVaiDaCerto = TValidation(getSchemas)
+const GetVaiDaCerto = TVvalidate(getSchemas)
 module.exports = {create,GetVaiDaCerto}

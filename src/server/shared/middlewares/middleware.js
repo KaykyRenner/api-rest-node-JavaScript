@@ -1,3 +1,3 @@
-const {TValidation} = require('./validation')
+const {TVvalidate} = require('./validation')
 
-module.exports={TValidation}
+module.exports={TVvalidate}
