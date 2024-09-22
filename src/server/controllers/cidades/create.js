@@ -3,8 +3,7 @@ const yup = require('yup')
 const {TVvalidate} = require('../../shared/middlewares/middleware')
 
 const esquemaValidation = yup.object().shape({
-    nomeCidade:yup.string().required().min(3),
-    nomeEstado:yup.string().required().min(3),
+    nomeCidade:yup.string().required().min(3)
 })
 
 const create = async (req, res) =>{

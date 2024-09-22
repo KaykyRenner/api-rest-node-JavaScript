@@ -1,6 +1,7 @@
 const create = require('./create')
-
+const getAll = require('./getAll')
 const cidadeController = {
-    ...create
+    ...create,
+    ...getAll
 }
 module.exports = cidadeController
