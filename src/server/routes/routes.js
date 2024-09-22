@@ -10,8 +10,8 @@ router.get('/',(req,res)=>{
     return res.send('olá dev');
     
 });
-router.post('/cidadesCreate',cidadeController.getAllValidation,cidadeController.getAllResultados)
-router.post('/cidadesCreate',cidadeController.GetVaiDaCerto,cidadeController.create)
+router.get('/cidades',cidadeController.getAllValidation,cidadeController.getAllResultados)
+router.post('/cidades',cidadeController.GetVaiDaCerto,cidadeController.create)
 
 
 module.exports = router
