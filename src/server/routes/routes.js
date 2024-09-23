@@ -10,8 +10,11 @@ router.get('/',(req,res)=>{
     return res.send('olá dev');
     
 });
+router.get('/cidades/:id',cidadeController.getByIdValidation,cidadeController.getByIdResultado)
+router.put('/cidades/:id',cidadeController.updateByIdValidation,cidadeController.updateByIdResultado)
 router.get('/cidades',cidadeController.getAllValidation,cidadeController.getAllResultados)
-router.post('/cidades',cidadeController.GetVaiDaCerto,cidadeController.create)
+router.post('/cidades',cidadeController.getSchemasValidation,cidadeController.getSchemasResultados)
+router.delete('/cidades/:id',cidadeController.deleteByIdValidation,cidadeController.deleteByIdResultado)
 
 
 module.exports = router

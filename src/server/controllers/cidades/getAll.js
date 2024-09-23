@@ -12,7 +12,7 @@ const getAllSchemas = (req) =>{
     query: esquemaValidation
     }
 }
-const getAllResultados = (req = esquemaValidation,res)=>{
+const getAllResultados = (req,res)=>{
     console.log(req.query)
     return res.status(StatusCodes.INTERNAL_SERVER_ERROR).send('não implementado')
 }
