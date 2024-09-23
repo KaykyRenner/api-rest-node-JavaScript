@@ -7,5 +7,5 @@ require('dotenv').config()
 app.use(express.json())
 app.use(router)
 
-module.exports = app;
+module.exports = {app};
 

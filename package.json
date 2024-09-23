@@ -5,6 +5,7 @@
     "eslint": "^9.10.0",
     "globals": "^15.9.0",
     "nodemon": "^3.1.4",
+    "supertest": "^7.0.0",
     "yarn": "^1.22.22"
   },
   "name": "API-NODE-JAVASCRIPT",
@@ -15,12 +16,14 @@
   "private": false,
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "test": "jest"
   },
   "dependencies": {
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
     "http-status-codes": "^2.3.0",
+    "jest": "^29.7.0",
     "yup": "^1.4.0"
   }
 }
