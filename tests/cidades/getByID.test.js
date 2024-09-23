@@ -1,17 +1,17 @@
 const {StatusCodes} = require('http-status-codes');
 const {testServer} = require('../jest.setup');
-describe('cidades - delete',()=>{
-    it('deleta-ID',async()=>{
+describe('procura cidade pelo id',()=>{
+    it('procura pelo id',async()=>{
         const  id = 1;
         const res1 = await testServer
-            .delete(`/cidades/${id}`);
+            .get(`/cidades/${id}`);
             console.log(res1.body);
-            expect(res1.statusCode).toEqual(StatusCodes.NO_CONTENT);
+            expect(res1.statusCode).toEqual(StatusCodes.OK);
     });
-    it('ID não pode ser menos que 0',async()=>{
+    it('não existe cidade com id menor que 0',async()=>{
         const id = 0
         const res1 = await testServer
-        .delete(`/cidades/${id}`)
+        .get(`/cidades/${id}`)
         console.log(res1.body)
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST)
         expect(res1.body).toHaveProperty('erros.params.id')
@@ -19,7 +19,7 @@ describe('cidades - delete',()=>{
     it('ID não pode ser letras',async()=>{
         const id = 'a'
         const res1 = await testServer
-        .delete(`/cidades/${id}`)
+        .get(`/cidades/${id}`)
         console.log(res1.body)
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST)
         expect(res1.body).toHaveProperty('erros.params.id')

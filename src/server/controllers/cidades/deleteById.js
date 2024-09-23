@@ -12,7 +12,7 @@ const deleteById = (req) =>{
 }
 const deleteByIdResultado = (req ,res)=>{
     console.log(req.params)
-    return res.status(StatusCodes.NO_CONTENT).json({CidadeComId:req.params.id});
+    return res.status(StatusCodes.NO_CONTENT).json({CidadeComId:req.params.id });
 }
 const deleteByIdValidation = TVvalidate(deleteById)
 module.exports = {deleteByIdValidation,deleteByIdResultado}
