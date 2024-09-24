@@ -25,5 +25,8 @@
     "http-status-codes": "^2.3.0",
     "jest": "^29.7.0",
     "yup": "^1.4.0"
+  },
+  "egine":{
+    "node":"20.x"
   }
 }
