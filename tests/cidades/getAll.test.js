@@ -9,6 +9,7 @@ describe('procurar todas as cidades',()=>{
     const reBuscada = await testServer
     .get('/cidades')
     .send()
+    console.log(reBuscada.body)
     expect(Number(reBuscada.header['x-total-count'])).toBeGreaterThan(0);
     expect(reBuscada.statusCode).toEqual(StatusCodes.OK);
     expect(reBuscada.body.length).toBeGreaterThan(0);  

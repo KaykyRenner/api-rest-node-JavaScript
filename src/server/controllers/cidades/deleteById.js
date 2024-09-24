@@ -15,7 +15,7 @@ const deleteByIdResultado = (req ,res)=>{
     if(Number(req.params.id) >= 99999){return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({erros:{
         default:"registro não encontrado" 
     }}) }
-    return res.status(StatusCodes.NO_CONTENT).json({CidadeComId:req.params.id });
+    return res.status(StatusCodes.NO_CONTENT).json({id:req.params.id });
 }
 const deleteByIdValidation = TVvalidate(deleteById)
 module.exports = {deleteByIdValidation,deleteByIdResultado}

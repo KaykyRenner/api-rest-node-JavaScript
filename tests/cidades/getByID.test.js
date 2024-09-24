@@ -1,12 +1,21 @@
 const {StatusCodes} = require('http-status-codes');
 const {testServer} = require('../jest.setup');
 describe('procura cidade pelo id',()=>{
-    it('procura pelo id',async()=>{
-        const  id = 1;
+    it('procura pelo id', async () => {
         const res1 = await testServer
-            .get(`/cidades/${id}`);
-            console.log(res1.body);
-            expect(res1.statusCode).toEqual(StatusCodes.OK);
+            .post('/cidades')
+            .send({ nomeCidade: "Arcoverde" });
+    
+        expect(res1.statusCode).toEqual(StatusCodes.CREATED);
+        const criaID = res1.body.id; // Verifique se o campo id está correto no body da resposta
+        console.log('ID criado:', criaID); // Log do ID para verificação
+        
+        const buscaRegistro = await testServer
+            .get(`/cidades/${criaID}`);
+        
+        console.log(buscaRegistro.body); // Verifica a resposta do get
+        expect(buscaRegistro.statusCode).toEqual(StatusCodes.OK);
+        expect(buscaRegistro.body).toHaveProperty('nomeCidade');
     });
     it('não existe cidade com id menor que 0',async()=>{
         const id = 0
