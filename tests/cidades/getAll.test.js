@@ -1,6 +1,18 @@
 const {StatusCodes} = require('http-status-codes');
 const {testServer} = require('../jest.setup');
 describe('procurar todas as cidades',()=>{
+    it('buscar todos os registros',async()=>{
+        const res1 = await testServer
+        .post('/cidades')
+        .send({nomeCidade: "Arcoverde"})
+    expect(res1.statusCode).toEqual(StatusCodes.CREATED)
+    const reBuscada = await testServer
+    .get('/cidades')
+    .send()
+    expect(Number(reBuscada.header['x-total-count'])).toBeGreaterThan(0);
+    expect(reBuscada.statusCode).toEqual(StatusCodes.OK);
+    expect(reBuscada.body.length).toBeGreaterThan(0);  
+    })
     it('procura pelo query', async ()=>{
         const res1 = await testServer
         .get('/cidades?page=1&limit=10&filter=algumFiltro')

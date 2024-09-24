@@ -24,4 +24,12 @@ describe('procura cidade pelo id',()=>{
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST)
         expect(res1.body).toHaveProperty('erros.params.id')
     })
+    it('id não encontrado',async()=>{
+        const id = 99999
+        const res1 = await testServer
+        .delete(`/cidades/${id}`)
+        console.log(res1.body)
+        expect(res1.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR)
+        expect(res1.body).toHaveProperty('erros.default')
+    })
 });
