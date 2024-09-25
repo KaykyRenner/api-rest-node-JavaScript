@@ -1,7 +1,6 @@
 const { StatusCodes } = require('http-status-codes');
 const yup = require('yup');
 const { TVvalidate } = require('../../shared/middlewares/middleware');
-const { default: nodemon } = require('nodemon');
 
 // Esquema de validação para o ID
 const esquemaValidation = yup.object().shape({
