@@ -21,7 +21,7 @@ const getAllSchemas = (req) =>{
 const getAllResultados = (req,res)=>{
     res.setHeader('access-control-expose-headers', 'x-total-count');
     res.setHeader('x-total-count', 1);
-    return res.status(StatusCodes.OK).json([{id:1,nomeCidade:'Arcoverde'}])
+    return res.status(StatusCodes.OK).json([{id:1,nomeCidade:"arcoverde"}])
 }
 const getAllValidation = TVvalidate(getAllSchemas)
 module.exports = {getAllValidation,getAllResultados}

@@ -18,7 +18,7 @@ const getById = () => {
 const getByIdResultado = (req, res) => {
     console.log(req.params); // Mostra o valor de params no console para verificação
     const idCidade = req.params.id
-    const cidade = {id:idCidade, nomeCidade:"Arcoverde"}
+    const cidade = {id:idCidade, nomeCidade:"arcoverde"}
     // Validação para ID muito grande
     if (Number(req.params.id) >= 99999) {
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
