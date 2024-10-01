@@ -10,13 +10,19 @@
         "dev": "nodemon src/index.js",
         "test": "jest",
         "lint": "eslint .",
+        "migrate": "knex --knexfile ./src/server/database/bancoDeDados/envios.js migrate:latest",
+        "rollback": "knex --knexfile ./src/server/database/bancoDeDados/envios.js migrate:rollback",
+        "rollback-all": "knex --knexfile ./src/server/database/bancoDeDados/envios.js migrate:rollback --all",
+        "seed": "knex --knexfile ./src/server/database/bancoDeDados/envios.js seed:run",
         "test:watch": "jest --watch"
     },
     "dependencies": {
         "dotenv": "^16.4.5",
         "express": "^4.21.0",
         "http-status-codes": "^2.3.0",
+        "knex": "^3.1.0",
         "mongoose": "^8.6.3",
+        "sqlite3": "^5.1.7",
         "yup": "^1.4.0"
     },
     "devDependencies": {
@@ -25,7 +31,6 @@
         "globals": "^15.9.0",
         "jest": "^29.7.0",
         "nodemon": "^3.1.7",
-        "sqlite": "^5.1.1",
         "supertest": "^7.0.0"
     },
     "engines": {
