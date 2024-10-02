@@ -2,7 +2,7 @@ const knex = require('knex')
 async function up(knex) {
     return knex.schema.createTable('cidade', table =>{
         table.bigIncrements('id').primary().index(); 
-        table.string('nomeCidade', 150).index().notNullable()
+        table.string('nome', 150).checkLength('<=',150).index().notNullable()
         //table.comment('Table usada para armazenar cidades')
     }).then(()=>{
         console.log('tabela CIDADE criada')

@@ -1,34 +1,52 @@
-const { StatusCodes } = require('http-status-codes')
-const yup = require('yup')
-const {TVvalidate} = require('../../shared/middlewares/middleware');
-const knex = require('knex');
+const { StatusCodes } = require('http-status-codes');
+const yup = require('yup');
+const { TVvalidate } = require('../../shared/middlewares/middleware');
+const { createCidade } = require('../../database/bancoDeDados/providers/cidades/index');
 
-
+// Esquema de validação com Yup
 const esquemaValidation = yup.object().shape({
     nomeCidade: yup.string()
         .required('nomeCidade é obrigatório')
         .min(3, 'nomeCidade deve ter pelo menos 3 caracteres')
+        .max(150)
         .strict() // Adiciona a validação estrita
         .test('not-a-number', 'nomeCidade não pode ser um número', value => {
             return value ? isNaN(value) : true; // Garante que o valor é verificado apenas se não for nulo
         })
 });
 
-const getSchemas = (req) =>{
-    return{
-    body: esquemaValidation
+// Função para criar a cidade
+const getSchemasResultados = async (req, res) => {
+    try {
+        // Extrai o nome da cidade do corpo da requisição
+        const { nomeCidade } = req.body;
+
+        // Cria a cidade no banco de dados
+        const cidadeCriada = await createCidade(nomeCidade);
+
+        // Resposta de sucesso
+        return res.status(StatusCodes.CREATED).json({
+            id: cidadeCriada.id,
+            nomeCidade: cidadeCriada.nome
+        });
+    } catch (err) {
+        // Em caso de erro, retorna uma resposta com o erro
+        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            error: 'Erro ao criar a cidade',
+            details: err.message
+        });
     }
+};
 
-}
-function geraNumero(min,max){
-    return Math.floor(Math.random() *(max-min) + min)
-}
-const numeroAleatorio = geraNumero(1,100)
+// Função para obter o esquema de validação
+const getSchemas = () => {
+    return {
+        body: esquemaValidation
+    };
+};
 
-const getSchemasResultados = async (req, res) =>{
-    const criarCidade = { id:numeroAleatorio , nomeCidade:req.body.nomeCidade}
-    
-    res.status(StatusCodes.CREATED).json(criarCidade)
-}
-const getSchemasValidation = TVvalidate(getSchemas)
-module.exports = {getSchemasValidation,getSchemasResultados}
+// Middleware de validação
+const getSchemasValidation = TVvalidate(getSchemas);
+
+// Exporta as funções
+module.exports = { getSchemasValidation, getSchemasResultados };

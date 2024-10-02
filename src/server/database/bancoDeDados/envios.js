@@ -2,7 +2,7 @@ const path = require('path')
 
 const development = {
     client:'sqlite3',
-    useNullAsDefault:true,
+    useNullAsDefault: true,
     connection:{
         filename: path.resolve(__dirname,'..','..','..','..', 'baseDeDados.sqlite')
     },
