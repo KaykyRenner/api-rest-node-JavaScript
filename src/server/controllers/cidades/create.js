@@ -31,10 +31,11 @@ const getSchemasResultados = async (req, res) => {
         });
     } catch (err) {
         // Em caso de erro, retorna uma resposta com o erro
+        if(!res.headersSent){
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
             error: 'Erro ao criar a cidade',
             details: err.message
-        });
+        });}
     }
 };
 

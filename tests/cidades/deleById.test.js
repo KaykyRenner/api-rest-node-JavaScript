@@ -30,7 +30,7 @@ describe('cidades - delete',()=>{
         expect(res1.body).toHaveProperty('erros.params.id')
     })
     it('id não encontrado',async()=>{
-        const id = 99999
+        const id = 999999
         const res1 = await testServer
         .delete(`/cidades/${id}`)
         console.log(res1.body)

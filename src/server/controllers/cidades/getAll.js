@@ -1,6 +1,7 @@
 const { StatusCodes } = require('http-status-codes')
 const yup = require('yup')
 const {TVvalidate} = require('../../shared/middlewares/middleware')
+const { getAllCidades } = require('../../database/bancoDeDados/providers/cidades/index');
 
 const esquemaValidation = yup.object().shape({
     page: yup.number().notRequired().moreThan(0).integer(),
@@ -18,10 +19,24 @@ const getAllSchemas = (req) =>{
     query: esquemaValidation
     }
 }
-const getAllResultados = (req,res)=>{
+const getAllResultados = async (req,res)=>{
     res.setHeader('access-control-expose-headers', 'x-total-count');
-    res.setHeader('x-total-count', 1);
-    return res.status(StatusCodes.OK).json([{id:1,nomeCidade:"arcoverde"}])
+    
+
+    const page = Number(req.query.page) ||0
+    const limit = Number(req.query.limit)||10
+    const filter = req.query.filter || ''
+    try {
+        const cidade = await getAllCidades(page,limit,filter)
+        res.setHeader('x-total-count', cidade.length);
+        return res.status(StatusCodes.OK).json(cidade)
+    }catch(err){
+        console.error('erro ao buscar cidade')
+        if(!res.headersSent){
+        res.status(StatusCodes.BAD_REQUEST).json({message:'erro ao buscar cidades'})}
+    }
+    
+    
 }
 const getAllValidation = TVvalidate(getAllSchemas)
 module.exports = {getAllValidation,getAllResultados}

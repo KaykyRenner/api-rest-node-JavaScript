@@ -1,7 +1,7 @@
 const { StatusCodes } = require('http-status-codes')
 const yup = require('yup')
 const {TVvalidate} = require('../../shared/middlewares/middleware')
-
+const {deleteCidade} = require('../../database/bancoDeDados/providers/cidades/index');
 const esquemaValidation = yup.object().shape({
     id: yup.number().integer().required().moreThan(0)
 })
@@ -10,12 +10,26 @@ const deleteById = (req) =>{
     params: esquemaValidation
     }
 }
-const deleteByIdResultado = (req ,res)=>{
+const deleteByIdResultado = async (req ,res)=>{
     console.log(req.params)
-    if(Number(req.params.id) >= 99999){return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({erros:{
+    const {id} = req.params
+    
+
+    if(Number(req.params.id) >= 99999){return res.status(StatusCodes.NOT_FOUND).json({erros:{
         default:"registro não encontrado" 
     }}) }
-    return res.status(StatusCodes.NO_CONTENT).json({id:req.params.id });
+    try{
+    const deletandoId = await deleteCidade(id)
+    
+    if(deletandoId.status === StatusCodes.NOT_FOUND){
+        res.status(StatusCodes.NOT_FOUND).json({message:deletandoId.message})
+    }
+    return res.status(StatusCodes.NO_CONTENT);
+    } catch(err){
+        if(!res.headersSent){
+        return res.status(StatusCodes.BAD_REQUEST).json({message:'erro ao deletar'})}
+    }
+
 }
 const deleteByIdValidation = TVvalidate(deleteById)
 module.exports = {deleteByIdValidation,deleteByIdResultado}
