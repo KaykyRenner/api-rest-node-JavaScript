@@ -6,7 +6,7 @@ const deleteCidade = async (id) =>{
         const resultado = await knex('cidade').where('id',id).del()
 
         if(resultado){
-            return {status:StatusCodes.OK, message:'cidade deletada com sucesso'}
+            return {status:StatusCodes.NO_CONTENT, message:'cidade deletada com sucesso'}
         }
         else{
             return{status:StatusCodes.NOT_FOUND, message:'id não encontrado'}

@@ -15,7 +15,7 @@ describe('procura cidade pelo id',()=>{
         
         console.log(buscaRegistro.body); // Verifica a resposta do get
         expect(buscaRegistro.statusCode).toEqual(StatusCodes.OK);
-        expect(buscaRegistro.body).toHaveProperty('nomeCidade');
+        expect(buscaRegistro.body).toHaveProperty('nome');
     });
     it('não existe cidade com id menor que 0',async()=>{
         const id = 0
@@ -38,7 +38,7 @@ describe('procura cidade pelo id',()=>{
         const res1 = await testServer
         .delete(`/cidades/${id}`)
         console.log(res1.body)
-        expect(res1.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR)
-        expect(res1.body).toHaveProperty('erros.default')
+        expect(res1.statusCode).toEqual(StatusCodes.NOT_FOUND)
+        expect(res1.body).toHaveProperty('message','id não encontrado')
     })
 });

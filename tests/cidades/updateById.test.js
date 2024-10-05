@@ -1,6 +1,6 @@
 const {StatusCodes} = require('http-status-codes');
 const {testServer} = require('../jest.setup');
-describe('buscar cidade pelo ID',()=>{
+describe('atualizar pelo id',()=>{
     it('buscar pelo id', async()=>{
         const res1 = await testServer
         .post('/cidades')
@@ -52,7 +52,7 @@ describe('buscar cidade pelo ID',()=>{
         const res1 = await testServer
         .delete(`/cidades/${id}`)
         console.log(res1.body)
-        expect(res1.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR)
-        expect(res1.body).toHaveProperty('erros.default')
+        expect(res1.statusCode).toEqual(StatusCodes.NOT_FOUND)
+        expect(res1.body).toHaveProperty('message','id não encontrado')
     })
 })

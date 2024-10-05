@@ -34,7 +34,7 @@ describe('cidades - delete',()=>{
         const res1 = await testServer
         .delete(`/cidades/${id}`)
         console.log(res1.body)
-        expect(res1.statusCode).toEqual(StatusCodes.INTERNAL_SERVER_ERROR)
-        expect(res1.body).toHaveProperty('erros.default')
+        expect(res1.statusCode).toEqual(StatusCodes.NOT_FOUND)
+        expect(res1.body).toHaveProperty('message','id não encontrado')
     })
 });

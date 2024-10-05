@@ -8,11 +8,18 @@ describe('procurar todas as cidades',()=>{
     expect(res1.statusCode).toEqual(StatusCodes.CREATED)
     const reBuscada = await testServer
     .get('/cidades')
-    .send()
     console.log(reBuscada.body)
-    expect(Number(reBuscada.header['x-total-count'])).toBeGreaterThan(0);
-    expect(reBuscada.statusCode).toEqual(StatusCodes.OK);
-    expect(reBuscada.body.length).toBeGreaterThan(0);  
+
+    const totalCount = reBuscada.headers['x-total-count']
+    expect(totalCount).toBeDefined()
+    expect(Number(totalCount)).not.toBeNaN();
+    expect(Number(totalCount)).toBeGreaterThan(0);
+
+        // Verifica se o status da resposta é OK
+        expect(reBuscada.statusCode).toEqual(StatusCodes.OK);
+
+        // Verifica se a lista de cidades contém mais de 0 itens
+        expect(reBuscada.body.length).toBeGreaterThan(0);  
     })
     it('procura pelo query', async ()=>{
         const res1 = await testServer
