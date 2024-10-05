@@ -30,7 +30,7 @@ const getByIdResultado = async (req, res) => {
         res.status(StatusCodes.NOT_FOUND).json({message:'id não encontrado'})
     }
     // Retorno de sucesso
-    return res.status(StatusCodes.OK).json(resultado.cidade);
+    return res.status(resultado.status  ).json(resultado.cidade||{message:resultado.message});
 }catch(err){
     if(!res.headersSent){
         return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
