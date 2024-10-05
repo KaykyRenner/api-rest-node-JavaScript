@@ -14,17 +14,13 @@ const deleteByIdResultado = async (req ,res)=>{
     console.log(req.params)
     const {id} = req.params
     
-
-    if(Number(req.params.id) >= 99999){return res.status(StatusCodes.NOT_FOUND).json({erros:{
-        default:"registro não encontrado" 
-    }}) }
     try{
     const deletandoId = await deleteCidade(id)
     
     if(deletandoId.status === StatusCodes.NOT_FOUND){
         res.status(StatusCodes.NOT_FOUND).json({message:deletandoId.message})
     }
-    return res.status(StatusCodes.NO_CONTENT);
+    return res.status(deletandoId.status).json(deletandoId.message);
     } catch(err){
         if(!res.headersSent){
         return res.status(StatusCodes.BAD_REQUEST).json({message:'erro ao deletar'})}
