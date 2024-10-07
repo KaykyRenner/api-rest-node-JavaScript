@@ -7,7 +7,7 @@ const StartServe = ()=>{app.listen(PORT, () => {
 if(process.env.IS_LOCALHOST !== 'true'){
 knex.migrate.latest().then(
     ()=>{
-        StartServe()
+        knex.seed.run().then(()=>{StartServe}).catch(console.log('err'))
     }
 ).catch(console.log('erro'))}
 else{
