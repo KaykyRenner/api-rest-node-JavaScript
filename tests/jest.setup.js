@@ -5,6 +5,7 @@ const testServer = supertest(app)
 
 beforeAll(async () =>{
     await knex.migrate.latest()
+    await knex.seed.run()
 })
 
 afterAll(async ()=>{
