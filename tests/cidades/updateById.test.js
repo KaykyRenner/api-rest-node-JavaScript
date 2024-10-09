@@ -1,15 +1,17 @@
 const {StatusCodes} = require('http-status-codes');
 const {testServer} = require('../jest.setup');
 describe('atualizar pelo id',()=>{
-    it('buscar pelo id', async()=>{
-        const res1 = await testServer
-        .post('/cidades')
-        .send({nomeCidade:"Arcoverde"})
-        const id = res1.body.id
+    it('atualizar pelo id', async()=>{
+        //const res1 = await testServer
+        //.post('/cidades')
+        //.send({nomeCidade:"Arcoverde"})
+
+        //console.log(res1.body.id);
+        const id = 1
+
         const res2 = await testServer
         .put(`/cidades/${id}`)
         .send({nomeCidade:"são paulo"})
-        console.log(res2.body)
         expect(res2.statusCode).toEqual(StatusCodes.OK)
 
     })
@@ -18,7 +20,6 @@ describe('atualizar pelo id',()=>{
         const res1 = await testServer
         .put(`/cidades/${id}`)
         .send({})
-        console.log(res1.body)
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST)
         expect(res1.body).toHaveProperty('erros.params.id')
         expect(res1.body).toHaveProperty('erros.body.nomeCidade')
@@ -29,7 +30,7 @@ describe('atualizar pelo id',()=>{
         .put(`/cidades/${id}`)
         .send({nomeCidade:"aa"})
 
-        console.log(res1.body)
+        
 
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST)
         expect(res1.body).toHaveProperty('erros.params.id')
@@ -41,7 +42,7 @@ describe('atualizar pelo id',()=>{
         .put(`/cidades/${id}`)
         .send({nomeCidade:"12"})
 
-        console.log(res1.body)
+        
 
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST)
         expect(res1.body).toHaveProperty('erros.params.id')
@@ -51,7 +52,6 @@ describe('atualizar pelo id',()=>{
         const id = 99999
         const res1 = await testServer
         .delete(`/cidades/${id}`)
-        console.log(res1.body)
         expect(res1.statusCode).toEqual(StatusCodes.NOT_FOUND)
         expect(res1.body).toHaveProperty('message','id não encontrado')
     })

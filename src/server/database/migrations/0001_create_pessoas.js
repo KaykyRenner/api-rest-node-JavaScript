@@ -3,7 +3,7 @@ async function up(knex) {
     return knex.schema.createTable('pessoa', table =>{
         table.bigIncrements('id').primary().index(); 
         table.string('nomeCompleto').index().notNullable()
-
+        table.string('email').unique().notNullable();
         table.bigInteger('cidadeId')
         .index()
         .notNullable()
@@ -11,6 +11,7 @@ async function up(knex) {
         .inTable('cidade')
         .onUpdate('CASCADE')
         .onDelete('RESTRICT')
+
 
         //table.comment('Table usada para armazenar cidades')
     }).then(()=>{

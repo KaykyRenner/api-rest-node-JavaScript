@@ -18,6 +18,10 @@ const esquemaValidation = yup.object().shape({
     .test("not-a-number", "Nome da pessoa não pode ser um número", (value) => {
          return value ? isNaN(value) : true; // Verifica se não é um número
     }),
+    email:yup
+    .string()
+    .required()
+    .email()
 
 });
 
@@ -25,21 +29,23 @@ const esquemaValidation = yup.object().shape({
 const getSchemasResultados = async (req, res) => {
     try {
         // Extrai o nome da pessoa do corpo da requisição
-        const {pessoa,cidadeId} = req.body;
+        const {pessoa,cidadeId,email} = req.body;
         if(!cidadeId){
             return res.status(StatusCodes.BAD_REQUEST).json({erro:'cidadeID é obrigatório'})
         }
         // Cria a pessoa no banco de dados
         const pessoaCriada = await createPessoa({
             nomeCompleto:pessoa,
-            cidadeId: cidadeId
+            cidadeId: cidadeId,
+            email:email
         });
 
         // Resposta de sucesso
         return res.status(StatusCodes.CREATED).json({
             id: pessoaCriada.id,
             pessoa: pessoaCriada.nomeCompleto,
-            cidadeId: pessoaCriada.cidadeId
+            cidadeId: pessoaCriada.cidadeId,
+            email: pessoaCriada.email
         });
     } catch (err) {
         

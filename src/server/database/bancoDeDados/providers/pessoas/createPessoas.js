@@ -6,12 +6,13 @@ const createPessoa = async (pessoa) => {
         // Inserir a pessoa no banco de dados
         await knex('pessoa').insert({
             nomeCompleto: pessoa.nomeCompleto,
-            cidadeId: pessoa.cidadeId
+            cidadeId: pessoa.cidadeId,
+            email:pessoa.email
         });
 
         // Buscar a pessoa recém-criada para retornar seu ID
         const resultado = await knex('pessoa')
-            .select('id', 'nomeCompleto')
+            .select('id', 'nomeCompleto','email')
             .where('nomeCompleto', pessoa.nomeCompleto)
             .first();
 
