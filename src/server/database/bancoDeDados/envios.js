@@ -3,6 +3,12 @@ const path = require('path')
 const development = {
     client:'sqlite3',
     useNullAsDefault: true,
+    pool:{
+        afterCreate:(conn,done)=>{
+            conn.run('PRAGMA busy_timeout = 30000;');
+            done()
+        }
+    },
     connection:{
         filename: path.resolve(__dirname,'..','..','..','..', 'baseDeDados.sqlite')
     },
