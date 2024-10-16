@@ -5,6 +5,7 @@ const {StatusCodes} = require('http-status-codes')
 //importanto as rotas da cidade
 const {cidadeController} = require('../controllers/index');
 const {pessoaController} = require('../controllers/index');
+const {usuarioController} = require('../controllers/index')
 router.get('/',(req,res)=>{
     return res.send('olá dev');
     
@@ -21,4 +22,8 @@ router.delete('/pessoas/:id',pessoaController.deleteByIdValidation,pessoaControl
 router.get('/pessoas',pessoaController.getAllValidation,pessoaController.getAllResultados)
 router.get('/pessoas/:id',pessoaController.getByIdValidation,pessoaController.getByIdResultado)
 router.put('/pessoas/:id',pessoaController.updateByIdValidation,pessoaController.updateByIdResultado)
+
+router.post('/cadastrar',usuarioController.singUpsValidation,usuarioController.singUpResultados)
+router.post('/entrar',usuarioController.singInValidation,usuarioController.SingInResultados)
+
 module.exports = router

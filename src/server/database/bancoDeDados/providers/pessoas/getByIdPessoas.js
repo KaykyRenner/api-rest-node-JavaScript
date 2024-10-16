@@ -17,7 +17,7 @@ const getByIdPessoa = async (id) =>{
         //const resultado = await knex('cidade').select('id').where('id', id).first()
     }
     catch(err){
-        console.log('erro ao deletar')
+        console.log('erro ao buscar')
         return {status:StatusCodes.INTERNAL_SERVER_ERROR, message:'erro ao encontrar pessoa'}
         
     }
