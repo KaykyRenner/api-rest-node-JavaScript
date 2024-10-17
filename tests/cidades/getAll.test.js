@@ -8,6 +8,7 @@ describe('procurar todas as cidades',()=>{
     //expect(res1.statusCode).toEqual(StatusCodes.CREATED)
     const reBuscada = await testServer
     .get('/cidades')
+    .set('authorization','Bearer teste.teste.teste')
     
 
     const totalCount = reBuscada.headers['x-total-count']

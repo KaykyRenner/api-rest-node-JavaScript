@@ -6,11 +6,13 @@ describe('cidades - delete', () => {
     it('deleta-ID', async () => {
         const res = await testServer
             .post('/cidades')
+            .set('authorization','Bearer teste.teste.teste')
             .send({ nomeCidade: "jaboatão" }); // Ajuste conforme sua API
             
     const cidadeId = res.body.id; // Substitua por um ID que você sabe que existe
         const resApagaDado = await testServer
             .delete(`/cidades/${cidadeId}`)
+            .set('authorization','Bearer teste.teste.teste')
             .send(); // Usa o ID existente
         expect(resApagaDado.statusCode).toEqual(StatusCodes.NO_CONTENT);
     });

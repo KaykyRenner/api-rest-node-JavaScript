@@ -1,13 +1,16 @@
 const { StatusCodes } = require('http-status-codes');
 const knex = require('../../knexConfig');
+const {hashPassowrd,verifyPassowrd} = require('../../../../shared/services//passowrdCrypsto');
 
 const createUsuario = async (usuario) => {
     try {
+        const hashedPassowrd = await hashPassowrd(usuario.senha)
+
         // Insere o novo usuário no banco de dados
         await knex('usuario').insert({
             email: usuario.email,
             nome: usuario.nome,
-            senha: usuario.senha,
+            senha: hashedPassowrd,
         });
 
         // Busca o usuário recém-criado para retornar seu ID e nome

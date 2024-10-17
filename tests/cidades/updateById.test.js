@@ -11,6 +11,7 @@ describe('atualizar pelo id',()=>{
 
         const res2 = await testServer
         .put(`/cidades/${id}`)
+        .set('authorization','Bearer teste.teste.teste')
         .send({nomeCidade:"são paulo"})
         expect(res2.statusCode).toEqual(StatusCodes.OK)
 

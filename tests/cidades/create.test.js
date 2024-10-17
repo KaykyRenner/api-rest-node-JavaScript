@@ -5,7 +5,10 @@ describe("cidades - create", () => {
     it("criar registro", async () => {
         const res1 = await testServer
             .post("/cidades")
-            .send({ nomeCidade: "Arcoverde" });
+            .set('authorization','Bearer teste.teste.teste')
+            .send({ nomeCidade: "Arcoverde",
+                    
+            });
 
         console.log(res1.body);
         expect(res1.statusCode).toEqual(StatusCodes.CREATED); // Verifique se você espera um status 201

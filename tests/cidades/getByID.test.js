@@ -9,7 +9,8 @@ describe('procura cidade pelo id',()=>{
 
         const criaID = 1; // Verifique se o campo id está correto no body da resposta
         const buscaRegistro = await testServer
-            .get(`/cidades/${criaID}`);
+            .get(`/cidades/${criaID}`)
+            .set('authorization','Bearer teste.teste.teste')
         
         console.log(buscaRegistro.body); // Verifica a resposta do get
         expect(buscaRegistro.statusCode).toEqual(StatusCodes.OK);
