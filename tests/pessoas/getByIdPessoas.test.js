@@ -4,6 +4,7 @@ describe('procura cidade pelo id',()=>{
     it('procura pelo id', async () => {
         const res1 = await testServer
             .post('/pessoas')
+            .set('authorization','Bearer teste.teste.teste')
             .send({ cidadeId: 1, pessoa: "testById", email: "testById@gmail.com" });
     
         expect(res1.statusCode).toEqual(StatusCodes.CREATED);
@@ -11,7 +12,8 @@ describe('procura cidade pelo id',()=>{
         console.log('ID criado:', criaID); // Log do ID para verificação
         
         const buscaRegistro = await testServer
-            .get(`/pessoas/${criaID}`);
+            .get(`/pessoas/${criaID}`)
+            .set('authorization','Bearer teste.teste.teste');
         
         console.log(buscaRegistro.body); // Verifica a resposta do get
         expect(buscaRegistro.statusCode).toEqual(StatusCodes.OK);
@@ -21,6 +23,7 @@ describe('procura cidade pelo id',()=>{
         const id = 0
         const res1 = await testServer
         .get(`/pessoas/${id}`)
+        .set('authorization','Bearer teste.teste.teste');
         console.log(res1.body)
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST)
         expect(res1.body).toHaveProperty('erros.params.id')
@@ -29,6 +32,7 @@ describe('procura cidade pelo id',()=>{
         const id = 'a'
         const res1 = await testServer
         .get(`/pessoas/${id}`)
+        .set('authorization','Bearer teste.teste.teste');
         console.log(res1.body)
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST)
         expect(res1.body).toHaveProperty('erros.params.id')
@@ -37,6 +41,7 @@ describe('procura cidade pelo id',()=>{
         const id = 99999
         const res1 = await testServer
         .delete(`/pessoas/${id}`)
+        .set('authorization','Bearer teste.teste.teste');
         console.log(res1.body)
         expect(res1.statusCode).toEqual(StatusCodes.NOT_FOUND)
         expect(res1.body).toHaveProperty('message','ID não encontrado')

@@ -20,8 +20,8 @@ describe('cidades - delete', () => {
     it('ID não pode ser menos que 0', async () => {
         const id = 0;
         const res1 = await testServer
-            .delete(`/cidades/${id}`);
-        
+            .delete(`/cidades/${id}`)
+            .set('authorization','Bearer teste.teste.teste');
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
         expect(res1.body).toHaveProperty('erros.params.id');
     });
@@ -29,7 +29,8 @@ describe('cidades - delete', () => {
     it('ID não pode ser letras', async () => {
         const id = 'a';
         const res1 = await testServer
-            .delete(`/cidades/${id}`);
+            .delete(`/cidades/${id}`)
+            .set('authorization','Bearer teste.teste.teste');
         
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
         expect(res1.body).toHaveProperty('erros.params.id');
@@ -38,7 +39,8 @@ describe('cidades - delete', () => {
     it('id não encontrado', async () => {
         const id = 999999;
         const res1 = await testServer
-            .delete(`/cidades/${id}`);
+            .delete(`/cidades/${id}`)
+            .set('authorization','Bearer teste.teste.teste');
         
         expect(res1.statusCode).toEqual(StatusCodes.NOT_FOUND);
         expect(res1.body).toHaveProperty('message', 'id não encontrado');

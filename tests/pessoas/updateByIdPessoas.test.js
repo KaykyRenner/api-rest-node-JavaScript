@@ -6,6 +6,7 @@ describe('atualizar pelo id', () => {
         // Criando uma nova pessoa
         const res = await testServer
             .post('/pessoas')
+            .set('authorization','Bearer teste.teste.teste')
             .send({ cidadeId: 1, pessoa: "testUpdate", email: "testUpdate@gmail.com"});
         
         // Verificando se a pessoa foi criada e se o ID foi retornado
@@ -17,6 +18,7 @@ describe('atualizar pelo id', () => {
         // Atualizando a pessoa
         const res2 = await testServer
             .put(`/pessoas/${pessoaId}`)
+            .set('authorization','Bearer teste.teste.teste')
             .send({ nomeCompleto: "Jubileu", cidadeId: 2 });
 
         // Verificando a resposta da atualização
@@ -29,6 +31,7 @@ describe('atualizar pelo id', () => {
         const id = 'a';
         const res1 = await testServer
             .put(`/pessoas/${id}`)
+            .set('authorization','Bearer teste.teste.teste')
             .send({});
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
         expect(res1.body).toHaveProperty('erros.params.id'); 
@@ -39,6 +42,7 @@ describe('atualizar pelo id', () => {
         const id = 0;
         const res1 = await testServer
             .put(`/pessoas/${id}`)
+            .set('authorization','Bearer teste.teste.teste')
             .send({ nomeCompleto: "aa" });
 
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
@@ -50,6 +54,7 @@ describe('atualizar pelo id', () => {
         const id = 1.5;
         const res1 = await testServer
             .put(`/pessoas/${id}`)
+            .set('authorization','Bearer teste.teste.teste')
             .send({ nomeCompleto: "12" });
 
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
@@ -61,6 +66,7 @@ describe('atualizar pelo id', () => {
         const id = 99999;
         const res1 = await testServer
             .put(`/pessoas/${id}`)
+            .set('authorization','Bearer teste.teste.teste')
             .send({ nomeCompleto: "Novo Nome" });
         expect(res1.statusCode).toEqual(StatusCodes.NOT_FOUND);
         expect(res1.body).toHaveProperty('message', 'ID não encontrado');

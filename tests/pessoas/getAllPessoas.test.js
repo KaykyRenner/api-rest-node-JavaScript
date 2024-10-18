@@ -4,10 +4,12 @@ describe('procurar todas as cidades',()=>{
     it('buscar todos os registros',async()=>{
         const res1 = await testServer
         .post('/pessoas')
-        .send({cidadeId: 1, pessoa: "testAll", email: "testAll@gmail.com" })
+        .set('authorization','Bearer teste.teste.teste')
+        .send({cidadeId: 1, pessoa: "testAll", email: "testAll@gmail.com" });
     expect(res1.statusCode).toEqual(StatusCodes.CREATED)
     const reBuscada = await testServer
     .get('/pessoas')
+    .set('authorization','Bearer teste.teste.teste');
     console.log(reBuscada.body)
 
     const totalCount = reBuscada.headers['x-total-count']
@@ -24,11 +26,13 @@ describe('procurar todas as cidades',()=>{
     it('procura pelo query', async ()=>{
         const res1 = await testServer
         .get('/pessoas?page=1&limit=10&filter=algumFiltro')
+        .set('authorization','Bearer teste.teste.teste');
         expect(res1.statusCode).toEqual(StatusCodes.OK)
     })
     it('page e limit não pode ser string', async()=>{
         const res1 = await testServer
         .get('/pessoas?page=a&limit=a&filter=algumFiltro')
+        .set('authorization','Bearer teste.teste.teste');
         console.log(res1.body)
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST)
         expect(res1.body).toHaveProperty('erros.query.page')
@@ -37,6 +41,7 @@ describe('procurar todas as cidades',()=>{
     it('page e limit não pode ser 0 ou menor', async()=>{
         const res1 = await testServer
         .get('/pessoas?page=0&limit=0&filter=algumFiltro')
+        .set('authorization','Bearer teste.teste.teste');
         console.log(res1.body)
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST)
         expect(res1.body).toHaveProperty('erros.query.page')
@@ -45,13 +50,15 @@ describe('procurar todas as cidades',()=>{
     it('filter não pode ser número', async()=>{
         const res1 = await testServer
         .get('/pessoas?page=1&limit=10&filter=1')
+        .set('authorization','Bearer teste.teste.teste');
         console.log(res1.body)
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST)
         expect(res1.body).toHaveProperty('erros.query.filter')
         
     })
     it('page e limit devem ser numeros inteiro', async () => {
-        const res1 = await testServer.get('/pessoas?page=1.5&limit=2.5&filter=algumFiltro');
+        const res1 = await testServer.get('/pessoas?page=1.5&limit=2.5&filter=algumFiltro')
+        .set('authorization','Bearer teste.teste.teste');
         console.log(res1.body)
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST);
         expect(res1.body).toHaveProperty('erros.query.page');

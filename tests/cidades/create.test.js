@@ -18,6 +18,7 @@ describe("cidades - create", () => {
     it("não pode criar registro com menos de 3 caracteres", async () => {
         const res1 = await testServer
             .post("/cidades")
+            .set('authorization','Bearer teste.teste.teste')
             .send({ nomeCidade: "Ar" });
 
         console.log(res1.body);
@@ -28,6 +29,7 @@ describe("cidades - create", () => {
     it("não pode ser um número", async () => {
         const res1 = await testServer
             .post("/cidades")
+            .set('authorization','Bearer teste.teste.teste')
             .send({ nomeCidade: 123 });
 
         console.log(res1.body);

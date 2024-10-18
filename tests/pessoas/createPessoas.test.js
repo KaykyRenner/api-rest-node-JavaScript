@@ -5,6 +5,7 @@ describe("cidades - create", () => {
     beforeAll(async () => {
         const res1 = await testServer
             .post("/pessoas")
+            .set('authorization','Bearer teste.teste.teste')
             .send({ cidadeId: 1, pessoa: "testCreate", email: "testeCreate@gmail.com" });
 
         console.log(res1.body);
@@ -15,6 +16,7 @@ describe("cidades - create", () => {
     it("não pode criar registro com menos de 3 caracteres", async () => {
         const res1 = await testServer
             .post("/pessoas")
+            .set('authorization','Bearer teste.teste.teste')
             .send({ cidadeId: 1, pessoa: "Ar" });
 
         console.log(res1.body);
@@ -25,6 +27,7 @@ describe("cidades - create", () => {
     it("não pode ser um número", async () => {
         const res1 = await testServer
             .post("/pessoas")
+            .set('authorization','Bearer teste.teste.teste')
             .send({ cidadeId: 1, pessoa: "123" });
 
         console.log(res1.body);

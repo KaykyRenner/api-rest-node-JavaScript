@@ -20,7 +20,8 @@ describe('atualizar pelo id',()=>{
         const id = 'a'
         const res1 = await testServer
         .put(`/cidades/${id}`)
-        .send({})
+        .set('authorization','Bearer teste.teste.teste')
+        .send({});
         expect(res1.statusCode).toEqual(StatusCodes.BAD_REQUEST)
         expect(res1.body).toHaveProperty('erros.params.id')
         expect(res1.body).toHaveProperty('erros.body.nomeCidade')
@@ -29,7 +30,8 @@ describe('atualizar pelo id',()=>{
         const id = 0
         const res1 = await testServer
         .put(`/cidades/${id}`)
-        .send({nomeCidade:"aa"})
+        .set('authorization','Bearer teste.teste.teste')
+        .send({nomeCidade:"aa"});
 
         
 
@@ -41,7 +43,8 @@ describe('atualizar pelo id',()=>{
         const id = 1.5
         const res1 = await testServer
         .put(`/cidades/${id}`)
-        .send({nomeCidade:"12"})
+        .set('authorization','Bearer teste.teste.teste')
+        .send({nomeCidade:"12"});
 
         
 
@@ -53,6 +56,7 @@ describe('atualizar pelo id',()=>{
         const id = 99999
         const res1 = await testServer
         .delete(`/cidades/${id}`)
+        .set('authorization','Bearer teste.teste.teste');
         expect(res1.statusCode).toEqual(StatusCodes.NOT_FOUND)
         expect(res1.body).toHaveProperty('message','id não encontrado')
     })
