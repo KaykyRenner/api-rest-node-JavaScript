@@ -1,9 +1,7 @@
 const { StatusCodes } = require("http-status-codes");
 const yup = require("yup");
 const { TVvalidate } = require("../../shared/middlewares/middleware");
-const {
-    createCidade,
-} = require("../../database/bancoDeDados/providers/cidades/index");
+const {createCidade,} = require("../../database/bancoDeDados/providers/cidades/index");
 
 // Esquema de validação com Yup
 const esquemaValidation = yup.object().shape({
